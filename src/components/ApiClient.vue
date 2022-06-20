@@ -189,7 +189,12 @@ export default {
             "Accept": "application/json",
             "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNmRjY2FmMjliMTU2NTVmYmM4YjE2MzYzZWViODIwZWNlOTZiM2RhMmVkNGMzN2MxNzYyYTYwYTY0MzJhNDQzZDA0MDkyYmM5ZmEzZDBmMmQiLCJpYXQiOjE2NTU1NjI3OTIuMTQzNjM2LCJuYmYiOjE2NTU1NjI3OTIuMTQzNjQsImV4cCI6MTY4NzA5ODc5Mi4xMzA2OTUsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.XaO2-KmWR4hetF7LdYJZLTuDshH5cy4_iB5JoB16AHI_mlHK1NzDf6KR34XQLm3ORhBlXeTtl42NapxkVMPbI1BYfhlOsasCZjtluHWJuHbEWw0tWuxg-OWyTWcSYfhd_Rv-fvBC8JeIaV_qUCaaPjldaN2xfsnt0Mpm27AiJ3fEYwXcL7ZEPOLrU-W4Bjh08xbO_Gn2lFJ_24Pi6xnNjG9udV-AXoyNPNoLQIvvJKY7ToTBK2-ZNegeUYqL-j4aE5dRJPlfeZYISUBBb6CC3rwGSAl_nxB6RMl7088mLWz1uWzc8vKE0nhxeDCEslsdJH0wxWXWpr6RYHgJFXr26j4vX6zh3Hihu_Oy85AGTqgLPM6sRawCE7I_BVoKe8LQPG32tvaf1fI3GTqhMmCiDkQ6dSr4AKcXTnQIBWnDqj_DEgqXMgk64pIMciIuz6WPiitdbdEMVOeXpEU_cQGsrdHOzRhLQ51FXCuEx-lAX5QgXP7uqlDj1jhUCApM9mps_rypAoODNGAEVOCMaE8CP_6qswmG4_wFyJ8thGZ0r8bzSQdYRdy8CZMi2fc5kEdipYATrkWi0Tt_X3jUrTGifYSpibXmcdxRFDVeLVVHSuBb12E0fv_10BetMOP1_BDmYvzp7lnnqxWu-B53vsrvTG5xLR3fAPi9fcH4DNS9OuQ"
           };
-          axios.post("http://test-task/api/equipment", this.form, {headers})
+          let data = {equipments: [{
+            equipment_type_id: this.form.equipment_type_id,
+            serial_number: this.form.serial_number,
+            note: this.form.note,
+          }]};
+          axios.post("http://test-task/api/equipment", data, {headers})
             .then((res) => {
                 this.successMsg = 'Equipment has been created'; 
                 this.errorMsg = '';
@@ -201,6 +206,7 @@ export default {
             .catch((error) => {
               this.errorMsg = error.response.data.message;
               this.successMsg = '';
+              console.log(data);
             }).finally(() => {
                 //Perform action in always
             });
